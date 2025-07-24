@@ -1,0 +1,208 @@
+<html>
+  <head>
+    <title>Task 2 - Internship Webpage</title>
+    <style>
+      /* Basic Styling */
+      body {
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #333;
+        color: white;
+        padding: 15px;
+        text-align: center;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        background-color: #444;
+      }
+
+      nav a {
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        background-color: #555;
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      section {
+        background-color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+
+      h1, h2 {
+        color: #333;
+      }
+
+      /* Form Styling */
+      form label {
+        display: block;
+        margin-top: 10px;
+      }
+
+      form input {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+      }
+
+      form button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      form button:hover {
+        background-color: #218838;
+      }
+
+      /* To-Do List Styling */
+      #taskInput {
+        width: 70%;
+        padding: 8px;
+      }
+
+      #addTaskBtn {
+        padding: 8px 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      #addTaskBtn:hover {
+        background-color: #0056b3;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      ul li {
+        background-color: #ddd;
+        margin: 5px 0;
+        padding: 8px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      ul li button {
+        background-color: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Responsive Design */
+      @media (min-width: 600px) {
+        main {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>My Internship Task 2</h1>
+    </header>
+    <nav>
+      <a href="#form">Contact Form</a>
+      <a href="#todo">To-Do List</a>
+    </nav>
+
+    <main>
+      <!-- Contact Form -->
+      <section id="form">
+        <h2>Contact Form</h2>
+        <form id="contactForm">
+          <label>Name:</label>
+          <input type="text" id="name" required>
+
+          <label>Email:</label>
+          <input type="email" id="email" required>
+
+          <label>Message:</label>
+          <input type="text" id="message" required>
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+
+      <!-- To-Do List -->
+      <section id="todo">
+        <h2>To-Do List</h2>
+        <input type="text" id="taskInput" placeholder="Enter a task">
+        <button id="addTaskBtn" onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p style="text-align: center; padding: 10px;">&copy; 2025 My Internship Project</p>
+    </footer>
+
+    <script>
+      // Form Validation
+      document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        if (name === "" || email === "" || message === "") {
+          alert("Please fill in all fields!");
+        } else if (!email.includes("@")) {
+          alert("Please enter a valid email address!");
+        } else {
+          alert("Form submitted successfully!");
+        }
+      });
+
+      // Add Task to To-Do List
+      function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const taskText = taskInput.value.trim();
+
+        if (taskText === "") {
+          alert("Please enter a task!");
+          return;
+        }
+
+        const li = document.createElement("li");
+        li.textContent = taskText;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.onclick = function() {
+          li.remove();
+        };
+
+        li.appendChild(removeBtn);
+        document.getElementById("taskList").appendChild(li);
+
+        taskInput.value = "";
+      }
+    </script>
+  </body>
+</html>
